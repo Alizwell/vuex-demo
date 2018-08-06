@@ -29,8 +29,15 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    increment(state) {
-      return state.count++;
+    increment(state, { amount = 1}) {
+      return state.count+= amount;
+    }
+  },
+  actions:{
+    increment ({commit}, amount) {
+      setTimeout(() => {        
+        commit('increment',amount);
+      }, 100);
     }
   }
 })

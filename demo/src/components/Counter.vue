@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from "Vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "Vuex";
 export default {
   computed: {
     count() {
@@ -25,7 +25,15 @@ export default {
     // increment() {
     //   this.$store.commit("increment");
     // }
-    ...mapMutations(["increment"])
+    // ...mapMutations(["increment"])
+    ...mapActions({
+      increment () {
+        this.$store.dispatch({
+          type:'increment',
+          amount:10
+        });
+      }
+    })
   }
 };
 </script>
