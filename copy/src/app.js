@@ -3,11 +3,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './components/App.vue'
 import store from './store'
-// import {
-//   currency
-// } from './currency'
+import {
+  currency
+} from './currency'
 
-// Vue.filter('currency', currency)
+Vue.filter('currency', currency)
 
 new Vue({
   el: '#app',

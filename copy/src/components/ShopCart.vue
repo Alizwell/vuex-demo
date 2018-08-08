@@ -1,29 +1,37 @@
 <template>
-    <div>
+    <div  class="cart">
         <h3>Your Cart</h3>
-        <ul  v-if="shopList.length > 0">
-            <li  v-for="item  in  shopList">
-                {{item.name}}--{{item.length}}
+        <p v-show="!products.length">
+            <i>Please  add some products  to cart.</i>
+        </p>
+        <ul>
+            <li  v-for="product in products">
+                {{ product.title }} - {{ product.price | currency }} x {{ product.quantity }}
             </li>
         </ul>
-        <p v-else><i>Please add some products to cart.</i></p>
-        <p>Total:{{total}}</p>
-        <button  @click="checkout">check out</button>
+        <p>Total:{{ total | currency('￥',4) }}</p>
+        <p>
+            <button  :disabled="!products.length"  @click="checkout(products)">Checkout</button>
+        </p>
+        <p  v-show="checkoutStatus">Checkout {{ checkoutStatus}}.</p>
     </div>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import {  mapGetters,mapState } from 'vuex'
     export default {
         computed:{
-            ...mapGetters({
-                total:'getCount',
-                shopList:'getShopList'
+            ...mapState({
+                checkoutStatus:state=> state.cart.checkoutStatus               
+            }),
+            ...mapGetters("cart", {
+                products: "cartProducts",
+                total:"cartTotalPrice"
             })
         },
         methods:{
-            checkout () {
-
+            checkout (products ) {
+                this.$store.dispatch("cart/checkout",products)
             }
         }
     }

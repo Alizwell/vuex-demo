@@ -2,6 +2,7 @@
     <div>
         <h1>Shopping  Cart Example</h1>
         <hr>
+        <h2>Products</h2>
         <Products/>         
         <hr>
         <ShopCart/>
@@ -18,7 +19,4 @@ export  default {
 
 </script>
 
-<style  type="css">
-
-</style>
 
