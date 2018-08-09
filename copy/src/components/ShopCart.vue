@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {  mapGetters,mapState } from 'vuex'
+import {  mapGetters,mapState ,mapActions} from 'vuex'
     export default {
         computed:{
             ...mapState({
@@ -30,9 +30,16 @@ import {  mapGetters,mapState } from 'vuex'
             })
         },
         methods:{
-            checkout (products ) {
-                this.$store.dispatch("cart/checkout",products)
-            }
+            // checkout (products ) {
+            //     this.$store.dispatch("cart/checkout",products)
+            // }
+            //还可以这样写。。。
+            ...mapActions({
+                    checkout (dispatch , products) {
+                        dispatch("cart/checkout",products)
+                    }
+                }
+            )
         }
     }
 </script>
